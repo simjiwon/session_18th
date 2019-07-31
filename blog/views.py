@@ -3,6 +3,7 @@ from django.utils import timezone
 from . import models
 from .models import Post, Comment
 
+
 # Create your views here.
 def home(request):
     PostObjectList = models.Post.objects
