@@ -1,0 +1,1 @@
+web: gunicorn session_18th.wsgi --log-file -
