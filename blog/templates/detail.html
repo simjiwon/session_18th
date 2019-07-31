@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- This Part is to show up the submitted 'Post' object by View in card shape -->
+<!-- 7 Errors Here -->
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1>Title : </h1>
+            <h3>{{ detailPostObject.title }}</h3>
+            <h5>Date Published : </h5>
+            <p>{{ detailPostObject.pub_date }}</p>
+            <h5>Content : </h5>
+            <p style="word-wrap: break-word">{{ detailPostObject.body }}</p>
+            <a href="{% url 'delete' detailPostObject.id %}"> Delete This Post </a>
+            <br>
+            <a href="{% url 'update' detailPostObject.id %}"> Update This Post </a>
+            <br>
+            <br>
+        </div>
+    </div>
+<!-- 7 Errors Here -->
+<!-- Post part End -->
+
+<!-- This Part is to show up the 'Comment' object list and 'Comment' form -->
+    <div class="container">
+        <h3>Comment Here</h5>
+        <!-- This part is to show up the 'Comment' objects in card shape -->
+        <!-- 2 Erros Here -->
+        <div class="card">
+            <div class="card-body">
+                {% for commentObject in detailPostObject.comments.all %}
+                <h6>{{ commentObject.comment_title}}</h6>
+                <p>{{ commentObject.comment_pub_date}}</p>
+                <h6 style="word-wrap: break-word">{{ commentObject.comment_body}}</h6>
+                <a href="{% url 'commentDelete' detailPostObject.id commentObject.id %}">Comment delete</a>
+                {% empty %}
+                <h6>No Comment Here</h6>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 2 Erros Here -->
+        <!-- Comment show part End -->
+
+        <!-- This part is to show up the 'Comment' form, datas submitted here go to the 'detail' function in View file -->
+        <!-- 5 Erros Here -->
+        <form class="form-group" action="{% url 'detail' detailPostObject.id %}" method="POST">
+            {% csrf_token %}
+            <h6>Comment title</h6>
+            <input class="form-control" type="text" name="comment_title">
+            <h6>Comment Content</h6>
+            <textarea class="form-control" name="comment_body"></textarea>
+            <br>
+            <input class="btn btn-dark" type="submit" value="Submit!">
+        </form>
+        <!-- 5 Erros Here -->
+        <!-- Comment form part End -->
+    </div>
+</div>
+<!-- Comment part End -->
+{% endblock %}

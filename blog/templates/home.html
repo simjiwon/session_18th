@@ -1,0 +1,27 @@
+<!-- Errors Here -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Post List</h1>
+    <div class="card">
+        <div class="card-body">
+            {% for PostObject in PostObjectList.all %}
+            <a href="{% url 'detail' PostObject.id %}"><h3>Title : </h3></a>
+            <p>{{ PostObject.title }}</p>
+            <h5>Date Published : </h5>
+            <p>{{ PostObject.pub_date }}</p>
+            <h5>Content : </h5>
+            <p style="text-overflow:ellipsis;
+            white-space:nowrap;
+            word-wrap:normal;
+            width:50rem;
+            overflow:hidden;"> {{ PostObject.body }} </p>
+            {% empty %}
+            <h1>No Post Here</h1>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- Errors Here -->
