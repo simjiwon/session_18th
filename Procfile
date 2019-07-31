@@ -1,1 +1,1 @@
-web: gunicorn session_18th.wsgi --log-file -
+web: gunicorn blog.wsgi --log-file -
